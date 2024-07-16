@@ -1,4 +1,3 @@
-import './App.css'
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import RootPage from "./pages/root-page/root-page.jsx";
 import BooksPage from "./pages/books-page/books-page.jsx";
