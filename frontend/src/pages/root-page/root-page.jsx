@@ -1,10 +1,11 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
+import Header from "../../components/header/header.jsx";
 
 const RootPage = () => {
     return (
         <>
-            <header>Header</header>
+            <Header/>
             <main>
                 <h1 className="visually-hidden">Travel App</h1>
                 <Outlet/>
