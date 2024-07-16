@@ -1,0 +1,28 @@
+.book-info {
+    width: 100%;
+    max-width: 300px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-gray);
+}
+
+.book-info__title {
+    margin: 0 0 5px;
+    font-weight: 600;
+    font-size: var(--font-size-400);
+    font-family: 'Playfair Display', serif;
+}
+
+.book-info__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+
+.book-info__genre::before, .book-info__author::before {
+    content: '•';
+    margin-right: 10px;
+    color: var(--color-blue-200);
+}

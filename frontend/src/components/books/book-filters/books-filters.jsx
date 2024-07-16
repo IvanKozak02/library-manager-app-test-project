@@ -1,6 +1,5 @@
 import React from 'react';
 import Input from "../../common/input/input.jsx";
-import Button from "../../common/button/button.jsx";
 import './books-filters.css';
 const BooksFilters = () => {
 
