@@ -1,9 +1,9 @@
 import React from 'react';
-
-const Input = ({label, ...props}) => {
+import './input.css';
+const Input = ({label,labelClasses, ...props}) => {
     const inputHeading = label ? <span className="input__heading">{label}</span> : null;
     return (
-        <label className="input">
+        <label className={labelClasses}>
             {inputHeading}
             <input {...props}/>
         </label>

@@ -2,6 +2,8 @@
     position: absolute;
     right: 0;
     height: 100%;
+    display: flex;
+    gap: 30px;
 }
 
 .nav-header__list {
@@ -22,4 +24,10 @@
     align-items: center;
     min-width: 80px;
     height: 100%;
+}
+
+.books-filter-actions__container{
+    display: flex;
+    gap: 30px;
+    align-items: center;
 }
