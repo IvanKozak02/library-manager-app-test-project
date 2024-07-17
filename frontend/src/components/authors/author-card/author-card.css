@@ -1,0 +1,7 @@
+.author-card__container{
+    border: 2px dashed #cccccc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}

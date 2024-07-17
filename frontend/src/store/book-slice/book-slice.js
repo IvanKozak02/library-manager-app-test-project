@@ -1,5 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addNewBookToLibrary, editBookInLibrary, removeBookFromLibrary} from "./actions.js";
+import {
+    addNewBookToLibrary,
+    editBookInLibrary,
+    fetchAllBooks,
+    removeAuthorFromLibrary,
+    removeBookFromLibrary
+} from "./actions.js";
 
 const initialBookState = {
     books: [],
@@ -37,6 +43,14 @@ const bookSlice = createSlice({
             state.authors = action.payload.authors;
 
         },
+        removeAuthor(state, action){
+            state.books = action.payload.books;
+            state.authors = action.payload.authors;
+        },
+        addBooks(state, action){
+            state.books = action.payload.books;
+            state.authors = action.payload.authors;
+        }
 
     },
     extraReducers: (builder)=>{
@@ -50,6 +64,13 @@ const bookSlice = createSlice({
             .addCase(removeBookFromLibrary.pending, (state)=> setLoaderStatus(state, 'pending'))
             .addCase(removeBookFromLibrary.fulfilled, (state)=>setLoaderStatus(state,'idle'))
             .addCase(removeBookFromLibrary.rejected, (state)=> setLoaderStatus(state, 'idle'))
+            .addCase(removeAuthorFromLibrary.pending, (state)=>setLoaderStatus(state,'pending'))
+            .addCase(removeAuthorFromLibrary.fulfilled, (state)=> setLoaderStatus(state, 'idle'))
+            .addCase(removeAuthorFromLibrary.rejected, (state)=> setLoaderStatus(state, 'idle'))
+
+            .addCase(fetchAllBooks.pending, (state)=>setLoaderStatus(state,'pending'))
+            .addCase(fetchAllBooks.fulfilled, (state)=> setLoaderStatus(state, 'idle'))
+            .addCase(fetchAllBooks.rejected, (state)=> setLoaderStatus(state, 'idle'))
     }
 });
 

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Input from "../../common/input/input.jsx";
 import './books-filters.css';
-const BooksFilters = () => {
+const BooksFilters = ({onBookFilter}) => {
+
 
     return (
         <section className="books-filter">
@@ -9,11 +10,13 @@ const BooksFilters = () => {
                 <Input labelClasses="books-title-filter__search input"
                        name="title"
                        type="search"
-                       placeholder="search by book title"/>
+                       placeholder="search by book title"
+                       />
                 <Input labelClasses="books-author-filter__search input"
                        name="author"
                        type="search"
-                       placeholder="search by book author"/>
+                       placeholder="search by book author"
+                       />
             </form>
         </section>
     );

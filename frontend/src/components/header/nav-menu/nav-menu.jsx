@@ -18,7 +18,7 @@ const NavMenu = () => {
 
     return (
         <nav className="header__nav">
-            {!location.pathname.includes('/book/') && <div className="books-filter-actions__container">
+            {!location.pathname.includes('/book/') && !location.pathname.includes('/authors') && <div className="books-filter-actions__container">
                 <Button label="Add New Book"
                         className="books-btn-filter__button button"
                         onClick={handleOpenAddNewBookPopup}

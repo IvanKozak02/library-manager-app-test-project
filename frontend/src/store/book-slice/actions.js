@@ -28,3 +28,21 @@ export const removeBookFromLibrary = createAsyncThunk(
         return await httpRequest(url, method);
     }
 )
+
+export const removeAuthorFromLibrary = createAsyncThunk(
+    'book/remove-author-from-library',
+    async function(authorName){
+        const url = `/books/:${authorName}`;
+        const method = 'DELETE';
+        return await httpRequest(url, method);
+    }
+)
+
+export const fetchAllBooks = createAsyncThunk(
+    'book/fetch-all-books-from-library',
+    async function(){
+        const url = '/books';
+        const method = 'GET';
+        return await httpRequest(url, method);
+    }
+)

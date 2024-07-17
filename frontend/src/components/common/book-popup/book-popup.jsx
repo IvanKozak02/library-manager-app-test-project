@@ -59,28 +59,22 @@ const BookPopup = ({book}) => {
             }
         } else {
             res = await dispatch(editBookInLibrary(formData));
-            // if (res.type.includes('/fulfilled')) {
-            //     dispatch(bookActions.editBook(res.payload));
-            //     dispatch(uiActions.setModalState(false))
-            // } else {
-            //     alert(res.error.message);
-            // }
-            dispatch(bookActions.editBook({book: {
-                    id: "2",
-                    title: "1984",
-                    author: "George Orwell",
-                    genre: "Dystopian",
-                    description: " novel set in a totalitarian society ruled by Big Brother, exploring themes of surveillance, truth, and individuality.",
-                    rating: 4.17,
-                    imageUrl: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                }}));
+            if (res.type.includes('/fulfilled')) {
+                dispatch(bookActions.editBook(res.payload));
+                dispatch(uiActions.setModalState(false))
+            } else {
+                alert(res.error.message);
+            }
+
 
         }
     }
 
 
     return (
-        <Modal name="book-trip">
+        <Modal name="book-trip"
+               onResetForm={!book ? handleResetFormData: null}
+        >
             <form className="book-popup__form" autoComplete="off" onSubmit={handleFormSubmit}>
                 <Input label="Title"
                        labelClasses="input"
