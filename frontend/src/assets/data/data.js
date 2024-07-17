@@ -54,3 +54,11 @@ export const BOOKS_MOCKS = [
         imageUrl: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     }
 ];
+
+
+// [
+//     {
+//         books: [],
+//         authors: [{name: '', booksIds: [], numberOfBooks}]
+//     }
+// ]

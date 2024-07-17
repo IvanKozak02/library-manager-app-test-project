@@ -1,20 +1,33 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import booksIcon from '../../../assets/icons/books.svg';
 import authorsIcon from '../../../assets/icons/authors.svg';
 import './nav-menu.css';
 import Button from "../../common/button/button.jsx";
+import {useDispatch} from "react-redux";
+import {actions as uiActions} from "../../../store/uiSlice/ui-slice.js";
+
 const NavMenu = () => {
+
+    const dispatch = useDispatch();
+    const location = useLocation();
+
+    const handleOpenAddNewBookPopup = () => {
+        dispatch(uiActions.setModalState(true));
+    }
+
     return (
         <nav className="header__nav">
-            <div className="books-filter-actions__container">
+            {!location.pathname.includes('/book/') && <div className="books-filter-actions__container">
                 <Button label="Add New Book"
                         className="books-btn-filter__button button"
-                        type="submit"/>
+                        onClick={handleOpenAddNewBookPopup}
+                />
                 <Button label="Export All Books"
                         className="books-btn-filter__button button"
-                        type="submit"/>
-            </div>
+                />
+            </div>}
+
             <ul className="nav-header__list">
                 <li className="nav-header__item">
                     <Link to="/"

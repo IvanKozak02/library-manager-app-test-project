@@ -1,19 +1,20 @@
 import './modal.css'
 import React from "react";
 import Button from "../button/button";
+import {useDispatch, useSelector} from "react-redux";
+import {actions as uiActions} from "../../../store/uiSlice/ui-slice.js";
 
+const Modal = ({children}) => {
 
-const Modal = ({children, name, isOpen, onOpenModal, onResetFormData}) => {
+    const isOpenModal = useSelector(state => state.ui.isModalOpen);
+    const dispatch = useDispatch();
+
     const handleCloseBtnClick = () => {
-        onResetFormData();
-        onOpenModal(false);
-        
-        //todo dispatch(uiSlice.closeModal());
-
+        dispatch(uiActions.setModalState(false));
     }
 
     return (
-        <div hidden={!isOpen}>
+        <div hidden={!isOpenModal}>
             <div className="modal">
                 <div className="book-popup">
                     <Button label='×'

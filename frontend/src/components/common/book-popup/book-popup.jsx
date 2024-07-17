@@ -3,16 +3,22 @@ import Modal from "../../common/modal/modal";
 import Input from "../../common/input/input";
 import React, {useState} from "react";
 import Button from "../../common/button/button";
+import {useDispatch, useSelector} from "react-redux";
+import {addNewBookToLibrary, editBookInLibrary} from "../../../store/book-slice/actions.js";
+import {actions as uiActions} from "../../../store/uiSlice/ui-slice.js";
+import {actions as bookActions} from "../../../store/book-slice/book-slice";
 
 const BookPopup = ({book}) => {
     const [bookImage, setBookImage] = useState(null);
     const [formState, setFormState] = useState({
-        title: book.title || '',
-        author: book.author || '',
-        genre: book.genre || '',
-        description: book.description || '',
-        rating: book.rating || '',
+        title: book?.title || '',
+        author: book?.author || '',
+        genre: book?.genre || '',
+        description: book?.description || '',
+        rating: book?.rating || '',
     });
+    const loader = useSelector(state => state.book.loader);
+    const dispatch = useDispatch();
 
 
     const handleChange = (e) => {
@@ -20,7 +26,7 @@ const BookPopup = ({book}) => {
         setFormState(prevState => ({...prevState, [name]: value}))
     }
 
-    const handleResetFormData = () => {
+    const handleResetFormData = () => {         // todo RESET_FORM
         setFormState({
             title: '',
             author: '',
@@ -34,21 +40,47 @@ const BookPopup = ({book}) => {
         setBookImage(e.target.files[0]);
     }
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
+        if (Object.keys(formState).some(key => key === '')) {
+            alert('Fill all input fields!!!');
+        }
         const formData = new FormData();
-        formData.append('bookDetails', JSON.stringify(formData));
+        formData.append('bookDetails', JSON.stringify(formState));
         formData.append('bookImage', bookImage);
-        console.log(formData.get('bookImage'));
-        // todo async thunk add new book to the server
-        // dispatch(bookActions.addNewBook());
+        let res;
+        if (!book) {
+            res = await dispatch(addNewBookToLibrary(formData));
+            if (res.type.includes('/fulfilled')) {
+                dispatch(bookActions.addNewBook(res.payload));  // if add new book
+                dispatch(uiActions.setModalState(false))
+            } else {
+                alert(res.error.message);
+            }
+        } else {
+            res = await dispatch(editBookInLibrary(formData));
+            // if (res.type.includes('/fulfilled')) {
+            //     dispatch(bookActions.editBook(res.payload));
+            //     dispatch(uiActions.setModalState(false))
+            // } else {
+            //     alert(res.error.message);
+            // }
+            dispatch(bookActions.editBook({book: {
+                    id: "2",
+                    title: "1984",
+                    author: "George Orwell",
+                    genre: "Dystopian",
+                    description: " novel set in a totalitarian society ruled by Big Brother, exploring themes of surveillance, truth, and individuality.",
+                    rating: 4.17,
+                    imageUrl: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                }}));
 
+        }
     }
 
 
     return (
-        <Modal name="book-trip"
-               isOpen={true}>
+        <Modal name="book-trip">
             <form className="book-popup__form" autoComplete="off" onSubmit={handleFormSubmit}>
                 <Input label="Title"
                        labelClasses="input"
@@ -95,11 +127,10 @@ const BookPopup = ({book}) => {
                        name="guests"
                        type="file"
                        onChange={handleChangeImage}
-                       required={true}
                 />
-                <Button label={book ? "Add New Book" : "Edit Book"}
-                        className="button"
-                        type="submit"
+                <Button
+                    label={loader && loader === 'pending' ? 'Saving changes...' : (book ? "Edit Book" : "Add New Book")}
+                    className="button"
                 />
             </form>
         </Modal>
