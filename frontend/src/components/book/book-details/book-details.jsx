@@ -7,9 +7,11 @@ import {actions as bookActions} from "../../../store/book-slice/book-slice";
 import {useDispatch, useSelector} from "react-redux";
 import {removeBookFromLibrary} from "../../../store/book-slice/actions.js";
 import {useNavigate} from "react-router-dom";
+import defaultBookImage from "../../../assets/default-book-image.png";
 
 const BookDetails = ({book}) => {
     const {id,title, author, genre, imageUrl, description, rating} = book;
+    let image = imageUrl !== '' ? `http://localhost:3000/` + imageUrl : defaultBookImage;
 
     const dispatch = useDispatch();
     const loader = useSelector(state => state.book.loader);
@@ -21,7 +23,7 @@ const BookDetails = ({book}) => {
     const handleRemoveBook = async (bookId) => {
         const res = await dispatch(removeBookFromLibrary(bookId))
         if(res.type.includes('/fulfilled')){
-            dispatch(bookActions.removeBook(bookId))
+            dispatch(bookActions.removeBook(res.payload))
             navigate('/')
         }else {
             alert(res.error.message)
@@ -30,7 +32,7 @@ const BookDetails = ({book}) => {
 
     return (
         <div className="book">
-            <img src={imageUrl}
+            <img src={image}
                  className="book__img"
                  alt="book photo"/>
             <div className="book__content">
@@ -46,6 +48,7 @@ const BookDetails = ({book}) => {
                     />
                     <Button onClick={()=>handleRemoveBook(id)}
                             className="book-details-action__button-delete button"
+                            disabled={loader === 'pending'}
                             label={loader && loader === 'pending' ? 'Deleting book...' : "Delete Book"}/>
                 </div>
             </div>

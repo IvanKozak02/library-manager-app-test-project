@@ -10,9 +10,8 @@ const AuthorCard = ({name, numberOfBooks}) => {
     const dispatch = useDispatch();
     const loader = useSelector(state => state.loader);
 
-    const handleRemoveAuthor = (authorName) => {
-        // dispatch(removeAuthorFromLibrary(authorName));
-        const res = dispatch(removeAuthorFromLibrary(authorName));
+    const handleRemoveAuthor = async (authorName) => {
+        const res = await dispatch(removeAuthorFromLibrary(authorName));
         if (res.type.includes('/fulfilled')){
             dispatch(bookActions.removeAuthor(res.payload));
         }
@@ -21,10 +20,11 @@ const AuthorCard = ({name, numberOfBooks}) => {
 
     return (
         <div className="author-card__container">
-            <h1>Dan Brown</h1>
-            <p>Number of books in library - 10</p>
+            <h1>{name}</h1>
+            <p>Number of books in library - {numberOfBooks}</p>
             <Button onClick={()=>handleRemoveAuthor(name)}
                     className="book-details-action__button-delete button"
+                    disabled={loader === 'pending'}
                     label={loader && loader === 'pending' ? 'Deleting Author...' : "Delete Author"}/>
         </div>
     );

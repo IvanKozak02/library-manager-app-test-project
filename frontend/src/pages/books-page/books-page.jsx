@@ -6,8 +6,6 @@ import {BOOKS_MOCKS} from "../../assets/data/data.js";
 const BooksPage = () => {
 
 
-
-
     return (
         <main>
             <BooksFilters/>

@@ -4,13 +4,10 @@ export async function httpRequest(route, method, data = null) {
     const url = API_URL + route;
     const options = {
         method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
     };
 
-    if (data) {
-        options.body = JSON.stringify(data);
+    if (data){
+        options.body = data;
     }
 
     const response = await fetch(url, options);

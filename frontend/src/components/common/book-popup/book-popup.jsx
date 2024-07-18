@@ -46,8 +46,11 @@ const BookPopup = ({book}) => {
             alert('Fill all input fields!!!');
         }
         const formData = new FormData();
-        formData.append('bookDetails', JSON.stringify(formState));
+        if (book){
+            formState.id = book.id;
+        }
         formData.append('bookImage', bookImage);
+        formData.append('bookDetails', JSON.stringify(formState));
         let res;
         if (!book) {
             res = await dispatch(addNewBookToLibrary(formData));
@@ -112,6 +115,8 @@ const BookPopup = ({book}) => {
                        labelClasses="input"
                        name="rating"
                        type="number"
+                       min={1}
+                       max={5}
                        value={formState.rating}
                        onChange={handleChange}
                        required={true}

@@ -23,7 +23,7 @@ export const editBookInLibrary = createAsyncThunk(
 export const removeBookFromLibrary = createAsyncThunk(
     'book/remove-book-from-library',
     async function(bookId){
-        const url = `/books/:${bookId}`;
+        const url = `/books/${bookId}`;
         const method = 'DELETE';
         return await httpRequest(url, method);
     }
@@ -32,7 +32,7 @@ export const removeBookFromLibrary = createAsyncThunk(
 export const removeAuthorFromLibrary = createAsyncThunk(
     'book/remove-author-from-library',
     async function(authorName){
-        const url = `/books/:${authorName}`;
+        const url = `/authors/${authorName}`;
         const method = 'DELETE';
         return await httpRequest(url, method);
     }

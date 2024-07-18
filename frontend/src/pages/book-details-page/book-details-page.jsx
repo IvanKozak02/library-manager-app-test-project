@@ -8,13 +8,18 @@ import {useSelector} from "react-redux";
 const BookDetailsPage = () => {
 
     const {bookId} = useParams();
-    const book = BOOKS_MOCKS.find(book => book.id === bookId);
-    // const books = useSelector(state => state.book.books);         // UNCOMMENT WHEN SERVER WILL WORK
-    // const book = books.find(book => book.id === bookId);
+    const books = useSelector(state => state.book.books);         // UNCOMMENT WHEN SERVER WILL WORK
+    let book;
+    if (books){
+        book = books.find(book => book.id === bookId);
+    }
 
     return <>
-        <BookDetails book={book}/>
-        <BookPopup book={book}/>
+        {book && <section style={{padding: '60px 20px'}}>
+            <BookDetails book={book}/>
+            <BookPopup book={book}/>
+        </section>}
+
     </>
 };
 

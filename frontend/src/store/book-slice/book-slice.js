@@ -23,18 +23,13 @@ const bookSlice = createSlice({
     initialState: initialBookState,
     reducers: {
         addNewBook(state, action){
-            state.books.push(action.payload);
+            state.books.push(action.payload.book);
             state.authors = action.payload.authors;
         },
         editBook(state, action){
             const updatedBook = action.payload.book;
             const bookIndex = state.books.findIndex(book => book.id === action.payload.book.id);
             state.books[bookIndex] = updatedBook;
-            // if (action.payload.author){
-            //     const updatedAuthor = action.payload.author;
-            //     const authorIndex = state.book.author.indexOf(updatedAuthor);
-            //     state.book.author[authorIndex] = updatedAuthor;
-            // }
             state.authors = action.payload.authors;
 
         },
@@ -67,7 +62,6 @@ const bookSlice = createSlice({
             .addCase(removeAuthorFromLibrary.pending, (state)=>setLoaderStatus(state,'pending'))
             .addCase(removeAuthorFromLibrary.fulfilled, (state)=> setLoaderStatus(state, 'idle'))
             .addCase(removeAuthorFromLibrary.rejected, (state)=> setLoaderStatus(state, 'idle'))
-
             .addCase(fetchAllBooks.pending, (state)=>setLoaderStatus(state,'pending'))
             .addCase(fetchAllBooks.fulfilled, (state)=> setLoaderStatus(state, 'idle'))
             .addCase(fetchAllBooks.rejected, (state)=> setLoaderStatus(state, 'idle'))

@@ -18,6 +18,8 @@ const RootPage = () => {
             const res = await dispatch(fetchAllBooks());
             if (res.type.includes('/fulfilled')){
                 dispatch(bookActions.addBooks(res.payload));
+            }else {
+                alert(res.error.message);
             }
         }
         if (initLoad){
