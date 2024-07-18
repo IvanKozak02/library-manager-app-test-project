@@ -1,7 +1,7 @@
 import './book-popup.css';
 import Modal from "../../common/modal/modal";
 import Input from "../../common/input/input";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import Button from "../../common/button/button";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewBookToLibrary, editBookInLibrary} from "../../../store/book-slice/actions.js";
@@ -20,13 +20,14 @@ const BookPopup = ({book}) => {
     const loader = useSelector(state => state.book.loader);
     const dispatch = useDispatch();
 
+    const ref = useRef(null);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormState(prevState => ({...prevState, [name]: value}))
     }
 
-    const handleResetFormData = () => {         // todo RESET_FORM
+    const handleResetFormData = () => {
         setFormState({
             title: '',
             author: '',
@@ -34,6 +35,10 @@ const BookPopup = ({book}) => {
             description: '',
             rating: '',
         });
+        const fileInput = document.getElementById('book-image');
+        if (fileInput) {
+            fileInput.value = '';
+        }
     }
 
     const handleChangeImage = (e) => {
@@ -122,15 +127,14 @@ const BookPopup = ({book}) => {
                        required={true}
                 />
                 <Input label="Image"
+                       id="book-image"
                        labelClasses="input"
                        name="guests"
                        type="file"
-                       onChange={handleChangeImage}
-                />
-                <Button
-                    label={loader && loader === 'pending' ? 'Saving changes...' : (book ? "Edit Book" : "Add New Book")}
-                    className="button"
-                />
+                       ref={ref}
+                       onChange={handleChangeImage}/>
+                <Button label={loader && loader === 'pending' ? 'Saving changes...' : (book ? "Edit Book" : "Add New Book")}
+                    className="button"/>
             </form>
         </Modal>
     );

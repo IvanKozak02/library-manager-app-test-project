@@ -1,7 +1,6 @@
 import React from 'react';
 import BookDetails from "../../components/book/book-details/book-details.jsx";
 import {useParams} from "react-router-dom";
-import {BOOKS_MOCKS} from "../../assets/data/data.js";
 import BookPopup from "../../components/common/book-popup/book-popup.jsx";
 import {useSelector} from "react-redux";
 
