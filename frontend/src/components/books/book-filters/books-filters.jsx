@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Input from "../../common/input/input.jsx";
 import './books-filters.css';
 import {useDispatch} from "react-redux";
 import {actions as filterActions} from "../../../store/book-filter-slice/book-filter-sclice.js";
 
-const BooksFilters = ({onBookFilter}) => {
+const BooksFilters = () => {
 
     const dispatch = useDispatch();
 

@@ -81,8 +81,7 @@ const BookPopup = ({book}) => {
 
     return (
         <Modal name="book-trip"
-               onResetForm={!book ? handleResetFormData: null}
-        >
+               onResetForm={!book ? handleResetFormData: null}>
             <form className="book-popup__form" autoComplete="off" onSubmit={handleFormSubmit}>
                 <Input label="Title"
                        labelClasses="input"
@@ -90,24 +89,21 @@ const BookPopup = ({book}) => {
                        type="text"
                        value={formState.title}
                        onChange={handleChange}
-                       required={true}
-                />
+                       required={true}/>
                 <Input label="Author"
                        name="author"
                        labelClasses="input"
                        type="text"
                        value={formState.author}
                        onChange={handleChange}
-                       required={true}
-                />
+                       required={true}/>
                 <Input label="Genre"
                        labelClasses="input"
                        name="genre"
                        type="text"
                        value={formState.genre}
                        onChange={handleChange}
-                       required={true}
-                />
+                       required={true}/>
                 <label className="input">
                     Description
                     <textarea name="description"
@@ -124,8 +120,7 @@ const BookPopup = ({book}) => {
                        max={5}
                        value={formState.rating}
                        onChange={handleChange}
-                       required={true}
-                />
+                       required={true}/>
                 <Input label="Image"
                        id="book-image"
                        labelClasses="input"

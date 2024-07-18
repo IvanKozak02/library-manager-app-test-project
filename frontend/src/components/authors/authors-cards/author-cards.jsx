@@ -1,5 +1,4 @@
 import React from 'react';
-
 import AuthorCard from "../author-card/author-card.jsx";
 import './author-cards.css';
 import {useSelector} from "react-redux";
