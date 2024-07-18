@@ -118,6 +118,7 @@ const BookPopup = ({book}) => {
                        type="number"
                        min={1}
                        max={5}
+                       step={0.1}
                        value={formState.rating}
                        onChange={handleChange}
                        required={true}/>
