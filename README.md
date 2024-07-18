@@ -1,21 +1,32 @@
 # Web application for managing a library
 
-I needed to build a simple web app for managing a library with books
-and authors.
+This web application allows users to manage a library with books and authors.
 
-The app was divided into two parts. Frontend part was written using React
-library, Redux state management system, react-router-dom and pure CSS. Server part was developed with NodeJS + ExpressJS.
-Uploading images to the server was implemented using multer library.
+# Frontend
+The frontend is built using:
 
-To start using application you should follow these steps:
+ * React for building the UI.
+ * Redux for state management.
+ * React Router DOM for navigation.
+ * Pure CSS for styling.
+
+# Backend
+The backend is developed with:
+
+ * Node.js and Express.js for creating the server.
+ * Multer for handling image uploads.
+
+# Installation and Usage
+
+To start using the application, follow these steps in terminal:
 
 1. cd frontend
 2. npm install
-3. npm run dev
-3. cd backend
-4. npm install
-5. npm start
-6. follow this link in browser http://localhost:5173
+3. npm run dev 
+4. cd backend 
+5. npm install 
+6. npm start 
+7. Open your browser and go to http://localhost:5173 to use the application.
 
 Application has simple user-friendly interface.
 
